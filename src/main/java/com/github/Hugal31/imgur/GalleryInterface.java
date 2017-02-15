@@ -9,11 +9,61 @@ import java.util.List;
 
 public class GalleryInterface {
 
-    private static final String HOT = "hot";
+    public enum Section {
+        HOT("hot"),
+        TOP("top"),
+        USER("user");
 
-    private static final String TOP = "top";
+        private final String value;
 
-    private static final String USER = "user";
+        Section(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
+    public enum Sort {
+        VIRAL("viral"),
+        TOP("top"),
+        TIME("time"),
+        RISING("rising");
+
+        private final String value;
+
+        Sort(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
+    public enum Window {
+        ALL("all"),
+        TOP("top"),
+        DAY("day"),
+        WEEK("week"),
+        MONTH("month"),
+        YEAR("year");
+
+        private final String value;
+
+        Window(String value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+
 
     private static final String VIRAL = "viral";
 
@@ -28,14 +78,14 @@ public class GalleryInterface {
     }
 
     public List<ImgurItem> getMainGalleryInfos() throws Exception {
-        return getInfos(HOT, VIRAL);
+        return getGallery(Section.HOT, Sort.VIRAL);
     }
 
-    public List<ImgurItem> getInfos(String section, String sort) throws Exception {
-        return getInfos(section, sort, 0, "day", true);
+    public List<ImgurItem> getGallery(Section section, Sort sort) throws Exception {
+        return getGallery(section, sort, 0, Window.DAY, true);
     }
 
-    public List<ImgurItem> getInfos(String section, String sort, int page, String window, boolean showViral) throws Exception {
+    public List<ImgurItem> getGallery(Section section, Sort sort, int page, Window window, boolean showViral) throws Exception {
         final OAuthRequest request = new OAuthRequest(
                 Verb.GET,
                 Imgur.API_URL + "3/gallery/" + section + '/' + sort + '/' + window + '/' + page + ".json?showViral=" + showViral);
