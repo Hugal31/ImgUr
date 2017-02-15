@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.util.Date;
 
-class ImageUtil {
+final class ImageUtil {
 
     static Image createImage(JSONObject data) {
         Image image = new Image();

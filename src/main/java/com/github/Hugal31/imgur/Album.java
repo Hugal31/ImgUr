@@ -12,7 +12,7 @@ public class Album {
 
     private Date datetime;
 
-    private String cover;
+    private String coverId;
 
     private int coverWidth;
 
@@ -78,12 +78,12 @@ public class Album {
         this.datetime = datetime;
     }
 
-    public String getCover() {
-        return cover;
+    public String getCoverId() {
+        return coverId;
     }
 
-    public void setCover(String cover) {
-        this.cover = cover;
+    public void setCoverId(String coverId) {
+        this.coverId = coverId;
     }
 
     public int getCoverWidth() {
