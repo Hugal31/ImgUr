@@ -16,6 +16,8 @@ public class Imgur {
 
     private AlbumInterface albumInterface;
 
+    private GalleryInterface galleryInterface;
+
     private ImageInterface imageInterface;
 
     public Imgur(String apiKey, String apiSecret) {
@@ -32,6 +34,13 @@ public class Imgur {
             albumInterface = new AlbumInterface(this);
         }
         return albumInterface;
+    }
+
+    public GalleryInterface getGalleryInterface() {
+        if (galleryInterface == null) {
+            galleryInterface = new GalleryInterface(this);
+        }
+        return galleryInterface;
     }
 
     public ImageInterface getImageInterface() {

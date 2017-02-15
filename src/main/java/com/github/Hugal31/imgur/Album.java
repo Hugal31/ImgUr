@@ -1,16 +1,8 @@
 package com.github.Hugal31.imgur;
 
-import java.util.Date;
+import java.util.List;
 
-public class Album {
-
-    private String id;
-
-    private String title;
-
-    private String description;
-
-    private Date datetime;
+public class Album extends ImgurItem {
 
     private String coverId;
 
@@ -42,41 +34,9 @@ public class Album {
 
     private int imageCount;
 
-    //private Image images
+    private List<Image> images;
 
     private boolean inGallery;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Date getDatetime() {
-        return datetime;
-    }
-
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
-    }
 
     public String getCoverId() {
         return coverId;
@@ -205,4 +165,5 @@ public class Album {
     public void setInGallery(boolean inGallery) {
         this.inGallery = inGallery;
     }
+
 }
