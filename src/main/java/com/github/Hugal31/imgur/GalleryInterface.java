@@ -3,10 +3,8 @@ package com.github.Hugal31.imgur;
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
-import com.sun.istack.internal.Nullable;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.List;
 
@@ -112,31 +110,31 @@ public class GalleryInterface {
                 ));
     }
 
-    public List<ImgurItem> advancedSearch(@Nullable String all,
-                                          @Nullable String any,
-                                          @Nullable String exactly,
-                                          @Nullable String not,
-                                          @Nullable String type,
-                                          @Nullable String size) throws Exception {
+    public List<ImgurItem> advancedSearch(String all,
+                                          String any,
+                                          String exactly,
+                                          String not,
+                                          String type,
+                                          String size) throws Exception {
         return advancedSearch(all, any, exactly, not, type, size, 0);
     }
 
-    public List<ImgurItem> advancedSearch(@Nullable String all,
-                                          @Nullable String any,
-                                          @Nullable String exactly,
-                                          @Nullable String not,
-                                          @Nullable String type,
-                                          @Nullable String size,
+    public List<ImgurItem> advancedSearch(String all,
+                                          String any,
+                                          String exactly,
+                                          String not,
+                                          String type,
+                                          String size,
                                           int page) throws Exception {
         return advancedSearch(all, any, exactly, not, type, size, page, Sort.TIME, Window.ALL);
     }
 
-    public List<ImgurItem> advancedSearch(@Nullable String all,
-                                          @Nullable String any,
-                                          @Nullable String exactly,
-                                          @Nullable String not,
-                                          @Nullable String type,
-                                          @Nullable String size,
+    public List<ImgurItem> advancedSearch(String all,
+                                          String any,
+                                          String exactly,
+                                          String not,
+                                          String type,
+                                          String size,
                                           int page,
                                           Sort sort,
                                           Window window) throws Exception {
