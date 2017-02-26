@@ -16,17 +16,25 @@ public class Imgur {
 
     private AlbumInterface albumInterface;
 
+    private AuthInterface authInterface;
+
     private GalleryInterface galleryInterface;
 
     private ImageInterface imageInterface;
 
     public Imgur(String apiKey, String apiSecret) {
+        this(apiKey, apiSecret, null);
+    }
+
+    public Imgur(String apiKey, String apiSecret, String callback) {
         this.apiKey = apiKey;
         this.apiSecret = apiSecret;
-        oAuthService = new ServiceBuilder()
+        ServiceBuilder serviceBuilder = new ServiceBuilder()
                 .apiKey(apiKey)
-                .apiSecret(apiSecret)
-                .build(com.github.scribejava.apis.ImgurApi.instance());
+                .apiSecret(apiSecret);
+        if (callback != null)
+            serviceBuilder.callback(callback);
+        oAuthService = serviceBuilder.build(com.github.scribejava.apis.ImgurApi.instance());
     }
 
     public AlbumInterface getAlbumInterface() {
@@ -34,6 +42,13 @@ public class Imgur {
             albumInterface = new AlbumInterface(this);
         }
         return albumInterface;
+    }
+
+    public AuthInterface getAuthInterface() {
+        if (authInterface == null) {
+            authInterface = new AuthInterface(this);
+        }
+        return authInterface;
     }
 
     public GalleryInterface getGalleryInterface() {

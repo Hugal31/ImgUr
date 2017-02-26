@@ -103,11 +103,11 @@ public class GalleryInterface {
     }
 
     public List<ImgurItem> search(String query, int page, Sort sort, Window window) throws Exception {
-        return performRequest(
-                new OAuthRequest(
-                        Verb.GET,
-                        String.format("%s3/gallery/search/%s/%s/%d.json?q=%s", Imgur.API_URL, sort, window, page, URLEncoder.encode(query, "UTF-8"))
-                ));
+        OAuthRequest request = new OAuthRequest(
+                Verb.GET,
+                String.format("%s3/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
+        request.addParameter("q", query);
+        return performRequest(request);
     }
 
     public List<ImgurItem> advancedSearch(String all,
@@ -138,21 +138,21 @@ public class GalleryInterface {
                                           int page,
                                           Sort sort,
                                           Window window) throws Exception {
-        String url = String.format("%s3/gallery/search/%s/%s/%d.json?", Imgur.API_URL, sort, window, page);
+        OAuthRequest request = new OAuthRequest(Verb.GET, String.format("%s3/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
 
         if (all != null)
-            url += "&q_all=" + URLEncoder.encode(all, "UTF-8");
+            request.addParameter("q_all", all);
         if (any != null)
-            url += "&q_any=" + URLEncoder.encode(any, "UTF-8");
+            request.addParameter("q_any", any);
         if (exactly != null)
-            url += "&q_exactly=" + URLEncoder.encode(exactly, "UTF-8");
+            request.addParameter("q_exactly", exactly);
         if (not != null)
-            url += "&q_not=" + URLEncoder.encode(not, "UTF-8");
+            request.addParameter("q_not", not);
         if (type != null)
-            url += "&q_type=" + URLEncoder.encode(type, "UTF-8");
+            request.addParameter("q_type", type);
         if (size != null)
-            url += "&q_size_px=" + URLEncoder.encode(size, "UTF-8");
-        return performRequest(new OAuthRequest(Verb.GET, url));
+            request.addParameter("q_size_px", size);
+        return performRequest(request);
     }
 
     private List<ImgurItem> performRequest(OAuthRequest request) throws Exception {
