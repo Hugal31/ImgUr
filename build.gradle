@@ -1,5 +1,5 @@
 group 'com.github.Hugal31'
-version '0.5'
+version '0.5.1'
 
 apply plugin: 'java'
 

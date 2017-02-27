@@ -1,13 +1,6 @@
 package com.github.Hugal31.imgur;
 
-import com.github.scribejava.apis.ImgurApi;
 import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.github.scribejava.core.model.OAuthConfig;
-import com.github.scribejava.core.model.OAuthRequest;
-import com.github.scribejava.core.model.Verb;
-
-import java.net.URI;
-import java.net.URL;
 
 public class AuthInterface {
 
