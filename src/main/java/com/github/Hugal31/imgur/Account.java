@@ -53,4 +53,14 @@ public class Account {
     public void setCreated(Date created) {
         this.created = created;
     }
+
+    @Override
+    public String toString() {
+        return "Account{"
+                + "id=" + id
+                + ", name=" + name
+                + ", bio=" + bio
+                + ", reputation=" + reputation
+                + ", created=" + created + '}';
+    }
 }

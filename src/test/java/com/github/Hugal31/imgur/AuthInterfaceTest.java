@@ -1,28 +1,37 @@
 package com.github.Hugal31.imgur;
 
-import org.junit.Ignore;
+import com.github.scribejava.core.model.OAuth2AccessToken;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
 public class AuthInterfaceTest {
 
     @Test
     public void testGetAuthorizationUrl() throws Exception {
-        AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(), ImgurPropertiesHelper.getApiSecret(), "http://github.com/")
+        assumeNotNull(ImgurPropertiesHelper.getCallback());
+
+        AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(),
+                ImgurPropertiesHelper.getApiSecret(),
+                ImgurPropertiesHelper.getCallback())
                 .getAuthInterface();
 
         String url = authInterface.getAuthorizationUrl();
         System.err.println(url);
-        assertTrue(url.contains("redirect_uri=http%3A%2F%2Fgithub.com%2F"));
+        assertTrue(url.contains("redirect_uri="));
     }
 
     @Test
-    @Ignore
     public void testGetAccessToken() throws Exception {
-        AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(), ImgurPropertiesHelper.getApiSecret(), "http://github.com/")
+        assumeNotNull(ImgurPropertiesHelper.getCallback(), ImgurPropertiesHelper.getCode());
+
+        AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(),
+                ImgurPropertiesHelper.getApiSecret(),
+                ImgurPropertiesHelper.getCallback())
                 .getAuthInterface();
 
-        System.err.println(authInterface.getAccessToken(""));
+        OAuth2AccessToken accessToken = authInterface.getAccessToken(ImgurPropertiesHelper.getCode());
+        System.err.println(accessToken);
     }
 }

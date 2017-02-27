@@ -12,6 +12,12 @@ class ImgurPropertiesHelper {
 
     private static String apiSecret;
 
+    private static String callback;
+
+    private static String code;
+
+    private static String refreshToken;
+
     private static synchronized void loadProperties() throws Exception {
         // Load properties
         Properties properties = new Properties();
@@ -26,6 +32,9 @@ class ImgurPropertiesHelper {
 
         apiKey = properties.getProperty("IMGUR_KEY");
         apiSecret = properties.getProperty("IMGUR_SECRET");
+        callback = properties.getProperty("IMGUR_CALLBACK");
+        code = properties.getProperty("IMGUR_CODE");
+        refreshToken = properties.getProperty("IMGUR_REFRESH_TOKEN");
         loaded = true;
     }
 
@@ -41,6 +50,27 @@ class ImgurPropertiesHelper {
             loadProperties();
         }
         return apiSecret;
+    }
+
+    static String getCallback() throws Exception {
+        if (!loaded) {
+            loadProperties();
+        }
+        return callback;
+    }
+
+    static String getCode() throws Exception {
+        if (!loaded) {
+            loadProperties();
+        }
+        return code;
+    }
+
+    static String getRefreshToken() throws Exception {
+        if (!loaded) {
+            loadProperties();
+        }
+        return refreshToken;
     }
 
 }

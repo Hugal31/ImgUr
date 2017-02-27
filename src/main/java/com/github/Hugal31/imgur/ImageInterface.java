@@ -19,9 +19,13 @@ public class ImageInterface {
 
         try {
             Response response = imgur.getOAuthService().execute(request);
-            if (response.getCode() != 200)
-                throw new ImgurException("API return response with code " + response.getCode() + " and body: " + response.getBody());
+
             JSONObject jsonResponse = new JSONObject(response.getBody());
+            if (! jsonResponse.optBoolean("success", false))
+                throw new ImgurException("API return response with code "
+                        + jsonResponse.optInt("code", response.getCode())
+                        + " and body: " + jsonResponse);
+
             return ImageUtil.createImage(jsonResponse.getJSONObject("data"));
         } catch (ImgurException e) {
             throw e;

@@ -47,4 +47,12 @@ public abstract class ImgurItem {
         this.datetime = datetime;
     }
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{"
+                + "id=" + getId()
+                + ", title=" + getTitle()
+                + ", description=" + getDescription()
+                + ", date=" + getDatetime() + '}';
+    }
 }

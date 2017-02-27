@@ -71,4 +71,14 @@ public class Image extends ImgurItem {
     public void setSection(String section) {
         this.section = section;
     }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName() + "{"
+                + "id=" + getId()
+                + ", title=" + getTitle()
+                + ", description=" + getDescription()
+                + ", date=" + getDatetime()
+                + ", type=" + getType() + '}';
+    }
 }

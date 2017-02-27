@@ -10,7 +10,7 @@ class AccountUtil {
         Account account = new Account();
         account.setId(data.getInt("id"));
         account.setName(data.getString("url"));
-        account.setBio(data.getString("bio"));
+        account.setBio(data.optString("bio", null));
         account.setCreated(new Date(data.getLong("created")));
         account.setReputation(data.getDouble("reputation"));
         return account;
