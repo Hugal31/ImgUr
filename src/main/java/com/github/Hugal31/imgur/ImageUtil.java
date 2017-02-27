@@ -12,8 +12,10 @@ final class ImageUtil {
     static Image createImage(JSONObject data) {
         Image image = new Image();
         image.setId(data.getString("id"));
-        image.setTitle(data.optString("title"));
-        image.setDescription(data.optString("description"));
+        if (! data.isNull("title"))
+            image.setTitle(data.getString("title"));
+        if (! data.isNull("description"))
+            image.setDescription(data.getString("description"));
         image.setDatetime(new Date(data.getLong("datetime")));
         image.setType(data.getString("type"));
         image.setWidth(data.getInt("width"));
@@ -21,7 +23,7 @@ final class ImageUtil {
         image.setSize(data.getInt("size"));
         image.setViews(data.getInt("views"));
         image.setLink(data.getString("link"));
-        image.setSection(data.optString("section"));
+        image.setSection(data.optString("section", null));
         return image;
     }
 

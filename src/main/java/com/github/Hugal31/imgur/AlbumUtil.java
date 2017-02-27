@@ -8,8 +8,10 @@ final class AlbumUtil {
     static Album createAlbum(JSONObject data) {
         Album album = new Album();
         album.setId(data.getString("id"));
-        album.setTitle(data.optString("title"));
-        album.setDescription(data.optString("description"));
+        if (! data.isNull("title"))
+            album.setTitle(data.getString("title"));
+        if (! data.isNull("description"))
+        album.setDescription(data.getString("description"));
         album.setDatetime(new Date(data.getLong("datetime")));
         return album;
     }
