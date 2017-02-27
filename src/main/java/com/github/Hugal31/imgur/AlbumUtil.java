@@ -10,7 +10,7 @@ final class AlbumUtil {
         album.setId(data.getString("id"));
         album.setTitle(data.optString("title"));
         album.setDescription(data.optString("description"));
-        album.setDatetime(new Date(data.getBigInteger("datetime").longValue()));
+        album.setDatetime(new Date(data.getLong("datetime")));
         return album;
     }
 }
