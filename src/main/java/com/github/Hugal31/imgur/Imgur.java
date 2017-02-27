@@ -16,6 +16,8 @@ public class Imgur {
 
     private OAuth2AccessToken accessToken;
 
+    private AccountInterface accountInterface;
+
     private AlbumInterface albumInterface;
 
     private AuthInterface authInterface;
@@ -37,6 +39,13 @@ public class Imgur {
         if (callback != null)
             serviceBuilder.callback(callback);
         oAuthService = serviceBuilder.build(com.github.scribejava.apis.ImgurApi.instance());
+    }
+
+    public AccountInterface getAccountInterface() {
+        if (accountInterface == null) {
+            accountInterface = new AccountInterface(this);
+        }
+        return accountInterface;
     }
 
     public AlbumInterface getAlbumInterface() {

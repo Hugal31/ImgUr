@@ -1,8 +1,11 @@
 package com.github.Hugal31.imgur;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 final class ImageUtil {
 
@@ -20,6 +23,19 @@ final class ImageUtil {
         image.setLink(data.getString("link"));
         image.setSection(data.optString("section"));
         return image;
+    }
+
+    static List<Image> createImages(JSONArray data) {
+        List<Image> images = new ArrayList<Image>();
+
+        for (int i = 0; i < data.length(); i++) {
+            Object o = data.get(i);
+            if (o instanceof JSONObject) {
+                images.add(createImage((JSONObject) o));
+            }
+        }
+
+        return images;
     }
 
 }
