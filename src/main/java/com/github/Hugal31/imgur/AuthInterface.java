@@ -29,4 +29,12 @@ public class AuthInterface {
         }
     }
 
+    public OAuth2AccessToken refreshAccessToken(String refreshToken) throws ImgurException {
+        try {
+            return imgur.getOAuthService().refreshAccessToken(refreshToken);
+        } catch (Exception e) {
+            throw new ImgurException(e);
+        }
+    }
+
 }
