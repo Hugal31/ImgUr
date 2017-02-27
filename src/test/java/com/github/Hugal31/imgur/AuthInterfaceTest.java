@@ -1,5 +1,6 @@
 package com.github.Hugal31.imgur;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -17,10 +18,11 @@ public class AuthInterfaceTest {
     }
 
     @Test
+    @Ignore
     public void testGetAccessToken() throws Exception {
         AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(), ImgurPropertiesHelper.getApiSecret(), "http://github.com/")
                 .getAuthInterface();
 
-        System.err.println(authInterface.getAccessToken("b34286ef6635ef27bc890c5614cbcb5e2df64cb1"));
+        System.err.println(authInterface.getAccessToken(""));
     }
 }
