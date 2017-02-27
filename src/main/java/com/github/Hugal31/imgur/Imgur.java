@@ -14,6 +14,8 @@ public class Imgur {
 
     private final OAuth20Service oAuthService;
 
+    private OAuth2AccessToken accessToken;
+
     private AlbumInterface albumInterface;
 
     private AuthInterface authInterface;
@@ -78,6 +80,10 @@ public class Imgur {
     }
 
     public OAuth2AccessToken getAccessToken() {
-        return null;
+        return accessToken;
+    }
+
+    public void setAccessToken(OAuth2AccessToken accessToken) {
+        this.accessToken = accessToken;
     }
 }
