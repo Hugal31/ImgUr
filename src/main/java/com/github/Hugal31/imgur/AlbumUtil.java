@@ -11,11 +11,10 @@ final class AlbumUtil {
     static Album createAlbum(JSONObject data) {
         Album album = new Album();
         album.setId(data.getString("id"));
-        if (! data.isNull("title"))
-            album.setTitle(data.getString("title"));
-        if (! data.isNull("description"))
+        album.setTitle(data.optString("title", null));
         album.setDescription(data.optString("description", null));
         album.setDatetime(new Date(data.getLong("datetime")));
+        album.setCoverId(data.optString("cover", null));
         return album;
     }
 
