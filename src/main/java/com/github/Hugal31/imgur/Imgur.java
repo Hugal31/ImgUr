@@ -2,11 +2,14 @@ package com.github.Hugal31.imgur;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.oauth.OAuth20Service;
+import org.json.JSONObject;
 
 public class Imgur {
 
-    public static final String API_URL = "https://api.imgur.com/";
+    public static final String API_URL = "https://api.imgur.com/3";
 
     private final String apiKey;
 
@@ -95,4 +98,24 @@ public class Imgur {
     public void setAccessToken(OAuth2AccessToken accessToken) {
         this.accessToken = accessToken;
     }
+
+    public JSONObject executeJSONRequest(OAuthRequest request) throws ImgurException {
+        getOAuthService().signRequest(getAccessToken(), request);
+
+        try {
+            Response response = getOAuthService().execute(request);
+
+            JSONObject jsonResponse = new JSONObject(response.getBody());
+            if (! jsonResponse.optBoolean("success", false))
+                throw new ImgurException(String.format("Imgur return code %d and error: '%s')",
+                        jsonResponse.optInt("code", response.getCode()),
+                        jsonResponse.optString("error", response.getBody())));
+            return jsonResponse;
+        } catch (ImgurException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ImgurException(e);
+        }
+    }
+
 }

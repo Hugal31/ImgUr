@@ -34,4 +34,18 @@ public class AuthInterfaceTest {
         OAuth2AccessToken accessToken = authInterface.getAccessToken(ImgurPropertiesHelper.getCode());
         System.err.println(accessToken);
     }
+
+    @Test
+    public void testRefreshToken() throws Exception {
+        assumeNotNull(ImgurPropertiesHelper.getRefreshToken());
+
+        AuthInterface authInterface = new Imgur(ImgurPropertiesHelper.getApiKey(),
+                ImgurPropertiesHelper.getApiSecret(),
+                ImgurPropertiesHelper.getCallback())
+                .getAuthInterface();
+
+        OAuth2AccessToken accessToken = authInterface.refreshAccessToken(ImgurPropertiesHelper.getRefreshToken());
+        System.err.println(accessToken);
+    }
+
 }

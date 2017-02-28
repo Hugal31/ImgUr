@@ -1,6 +1,8 @@
 package com.github.Hugal31.imgur;
 
+import com.github.scribejava.core.model.OAuthRequest;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -22,6 +24,14 @@ final class GalleryUtil {
             }
         }
         return itemList;
+    }
+
+    static List<ImgurItem> requestGallery(Imgur imgur, OAuthRequest request) throws ImgurException {
+        try {
+            return createGallery(imgur.executeJSONRequest(request).getJSONArray("data"));
+        } catch (JSONException e) {
+            throw new ImgurException(e);
+        }
     }
 
 }

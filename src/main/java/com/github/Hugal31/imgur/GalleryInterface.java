@@ -1,11 +1,8 @@
 package com.github.Hugal31.imgur;
 
 import com.github.scribejava.core.model.OAuthRequest;
-import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
-import org.json.JSONObject;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 public class GalleryInterface {
@@ -78,20 +75,22 @@ public class GalleryInterface {
         this.imgur = imgur;
     }
 
-    public List<ImgurItem> getMainGalleryInfos() throws Exception {
+    public List<ImgurItem> getMainGalleryInfos() throws ImgurException {
         return getGallery(Section.HOT, Sort.VIRAL);
     }
 
-    public List<ImgurItem> getGallery(Section section, Sort sort) throws Exception {
+    public List<ImgurItem> getGallery(Section section, Sort sort) throws ImgurException {
         return getGallery(section, sort, 0, Window.DAY, true);
     }
 
-    public List<ImgurItem> getGallery(Section section, Sort sort, int page, Window window, boolean showViral) throws Exception {
-        return performRequest(
-                new OAuthRequest(
-                        Verb.GET,
-                        Imgur.API_URL + "3/gallery/" + section + '/' + sort + '/' + window + '/' + page + ".json?showViral=" + showViral
-                ));
+    public List<ImgurItem> getGallery(Section section, Sort sort, int page, Window window, boolean showViral) throws ImgurException {
+        OAuthRequest request = new OAuthRequest(Verb.GET,
+                String.format("%s/gallery/%s/%s/%s/%d", Imgur.API_URL, section, sort, window, page));
+
+        if (showViral)
+            request.addParameter("showViral", "true");
+
+        return GalleryUtil.requestGallery(imgur, request);
     }
 
     public List<ImgurItem> search(String query) throws Exception {
@@ -105,9 +104,9 @@ public class GalleryInterface {
     public List<ImgurItem> search(String query, int page, Sort sort, Window window) throws Exception {
         OAuthRequest request = new OAuthRequest(
                 Verb.GET,
-                String.format("%s3/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
+                String.format("%s/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
         request.addParameter("q", query);
-        return performRequest(request);
+        return GalleryUtil.requestGallery(imgur, request);
     }
 
     public List<ImgurItem> advancedSearch(String all,
@@ -138,7 +137,7 @@ public class GalleryInterface {
                                           int page,
                                           Sort sort,
                                           Window window) throws Exception {
-        OAuthRequest request = new OAuthRequest(Verb.GET, String.format("%s3/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
+        OAuthRequest request = new OAuthRequest(Verb.GET, String.format("%s/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
 
         if (all != null)
             request.addParameter("q_all", all);
@@ -152,27 +151,8 @@ public class GalleryInterface {
             request.addParameter("q_type", type);
         if (size != null)
             request.addParameter("q_size_px", size);
-        return performRequest(request);
-    }
 
-    private List<ImgurItem> performRequest(OAuthRequest request) throws Exception {
-        imgur.getOAuthService().signRequest(imgur.getAccessToken(), request);
-
-        try {
-            Response response = imgur.getOAuthService().execute(request);
-
-            JSONObject jsonResponse = new JSONObject(response.getBody());
-            if (! jsonResponse.optBoolean("success", false))
-                throw new ImgurException("API return response with code "
-                        + jsonResponse.optInt("code", response.getCode())
-                        + " and body: " + jsonResponse);
-
-            return GalleryUtil.createGallery(jsonResponse.getJSONArray("data"));
-        } catch (ImgurException e) {
-            throw e;
-        } catch (Exception e) {
-            throw new ImgurException(e);
-        }
+        return GalleryUtil.requestGallery(imgur, request);
     }
 
 }
