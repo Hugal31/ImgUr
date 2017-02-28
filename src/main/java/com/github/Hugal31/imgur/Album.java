@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Album extends ImgurItem {
 
+    private Image cover;
+
     private String coverId;
 
     private int coverWidth;
@@ -37,6 +39,14 @@ public class Album extends ImgurItem {
     private List<Image> images;
 
     private boolean inGallery;
+
+    public void setCover(Image cover) {
+        this.cover = cover;
+    }
+
+    public Image getCover() {
+        return this.cover;
+    }
 
     public String getCoverId() {
         return coverId;
