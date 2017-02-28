@@ -93,15 +93,15 @@ public class GalleryInterface {
         return GalleryUtil.requestGallery(imgur, request);
     }
 
-    public List<ImgurItem> search(String query) throws Exception {
+    public List<ImgurItem> search(String query) throws ImgurException {
         return search(query, 0);
     }
 
-    public List<ImgurItem> search(String query, int page) throws Exception {
+    public List<ImgurItem> search(String query, int page) throws ImgurException {
         return search(query, page, Sort.TIME, Window.ALL);
     }
 
-    public List<ImgurItem> search(String query, int page, Sort sort, Window window) throws Exception {
+    public List<ImgurItem> search(String query, int page, Sort sort, Window window) throws ImgurException {
         OAuthRequest request = new OAuthRequest(
                 Verb.GET,
                 String.format("%s/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
@@ -114,7 +114,7 @@ public class GalleryInterface {
                                           String exactly,
                                           String not,
                                           String type,
-                                          String size) throws Exception {
+                                          String size) throws ImgurException {
         return advancedSearch(all, any, exactly, not, type, size, 0);
     }
 
@@ -124,7 +124,7 @@ public class GalleryInterface {
                                           String not,
                                           String type,
                                           String size,
-                                          int page) throws Exception {
+                                          int page) throws ImgurException {
         return advancedSearch(all, any, exactly, not, type, size, page, Sort.TIME, Window.ALL);
     }
 
@@ -136,7 +136,7 @@ public class GalleryInterface {
                                           String size,
                                           int page,
                                           Sort sort,
-                                          Window window) throws Exception {
+                                          Window window) throws ImgurException {
         OAuthRequest request = new OAuthRequest(Verb.GET, String.format("%s/gallery/search/%s/%s/%d.json", Imgur.API_URL, sort, window, page));
 
         if (all != null)
