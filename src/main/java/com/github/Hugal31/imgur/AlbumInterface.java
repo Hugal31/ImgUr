@@ -16,4 +16,10 @@ public class AlbumInterface {
                 new OAuthRequest(Verb.GET, String.format("%s/album/%s", Imgur.API_URL, albumId)));
     }
 
+    public void favorite(String albumId) throws ImgurException {
+        imgur.executeJSONRequest(new OAuthRequest(
+                Verb.POST,
+                String.format("%s/album/%s/favorite", Imgur.API_URL, albumId)));
+    }
+
 }

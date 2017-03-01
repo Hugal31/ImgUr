@@ -17,6 +17,7 @@ final class ImageUtil {
         image.setTitle(data.optString("title", null));
         image.setDescription(data.optString("description", null));
         image.setDatetime(new Date(data.getLong("datetime")));
+        image.setFavorite(data.optBoolean("favorite"));
         image.setType(data.getString("type"));
         image.setWidth(data.getInt("width"));
         image.setHeight(data.getInt("height"));

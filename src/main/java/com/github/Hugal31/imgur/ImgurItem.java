@@ -15,6 +15,8 @@ public abstract class ImgurItem {
 
     private Date datetime;
 
+    private boolean favorite = false;
+
     public String getId() {
         return id;
     }
@@ -45,6 +47,14 @@ public abstract class ImgurItem {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
     }
 
     @Override

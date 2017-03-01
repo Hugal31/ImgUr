@@ -15,6 +15,7 @@ final class AlbumUtil {
         album.setDescription(data.optString("description", null));
         album.setDatetime(new Date(data.getLong("datetime")));
         album.setCoverId(data.optString("cover", null));
+        album.setFavorite(data.optBoolean("favorite"));
         return album;
     }
 

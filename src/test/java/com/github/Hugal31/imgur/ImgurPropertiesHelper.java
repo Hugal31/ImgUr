@@ -18,6 +18,8 @@ class ImgurPropertiesHelper {
 
     private static String refreshToken;
 
+    private static String testImageId;
+
     private static String imageToUpload;
 
     private static synchronized void loadProperties() throws Exception {
@@ -37,7 +39,8 @@ class ImgurPropertiesHelper {
         callback = properties.getProperty("IMGUR_CALLBACK");
         code = properties.getProperty("IMGUR_CODE");
         refreshToken = properties.getProperty("IMGUR_REFRESH_TOKEN");
-        imageToUpload = properties.getProperty("IMGUR_TEST_IMAGE");
+        testImageId = properties.getProperty("IMGUR_TEST_IMAGE_ID");
+        imageToUpload = properties.getProperty("IMGUR_TEST_UPLOAD");
         loaded = true;
     }
 
@@ -83,4 +86,10 @@ class ImgurPropertiesHelper {
         return imageToUpload;
     }
 
+    public static String getTestImageId() throws Exception {
+        if (!loaded) {
+            loadProperties();
+        }
+        return testImageId;
+    }
 }

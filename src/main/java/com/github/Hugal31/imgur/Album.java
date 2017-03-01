@@ -24,8 +24,6 @@ public class Album extends ImgurItem {
 
     private String link;
 
-    private boolean favorite;
-
     private Boolean nsfw;
 
     private String section;
@@ -118,14 +116,6 @@ public class Album extends ImgurItem {
 
     public void setLink(String link) {
         this.link = link;
-    }
-
-    public boolean isFavorite() {
-        return favorite;
-    }
-
-    public void setFavorite(boolean favorite) {
-        this.favorite = favorite;
     }
 
     public Boolean getNsfw() {
