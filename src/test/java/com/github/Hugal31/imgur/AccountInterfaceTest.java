@@ -30,7 +30,7 @@ public class AccountInterfaceTest {
         AccountInterface accountInterface = imgur.getAccountInterface();
 
         Account account = accountInterface.getAccount();
-        assertNotNull(account.getName());
+        assertNotNull(account.getUrl());
         System.err.println(account);
     }
 

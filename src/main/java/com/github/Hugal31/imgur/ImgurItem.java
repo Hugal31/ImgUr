@@ -15,6 +15,10 @@ public abstract class ImgurItem {
 
     private Date datetime;
 
+    private String accountUrl;
+
+    private int accountId = -1;
+
     private boolean favorite = false;
 
     public String getId() {
@@ -47,6 +51,22 @@ public abstract class ImgurItem {
 
     public void setDatetime(Date datetime) {
         this.datetime = datetime;
+    }
+
+    public String getAccountUrl() {
+        return accountUrl;
+    }
+
+    public void setAccountUrl(String accountUrl) {
+        this.accountUrl = accountUrl;
+    }
+
+    public int getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public void setFavorite(boolean favorite) {

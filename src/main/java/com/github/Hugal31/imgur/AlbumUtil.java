@@ -14,8 +14,10 @@ final class AlbumUtil {
         album.setTitle(data.optString("title", null));
         album.setDescription(data.optString("description", null));
         album.setDatetime(new Date(data.getLong("datetime")));
-        album.setCoverId(data.optString("cover", null));
+        album.setAccountId(data.optInt("account_id", -1));
+        album.setAccountUrl(data.optString("account_url", null));
         album.setFavorite(data.optBoolean("favorite"));
+        album.setCoverId(data.optString("cover", null));
         return album;
     }
 

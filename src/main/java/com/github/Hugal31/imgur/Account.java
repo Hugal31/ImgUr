@@ -6,7 +6,7 @@ public class Account {
 
     private int id;
 
-    private String name;
+    private String url;
 
     private String bio;
 
@@ -22,12 +22,12 @@ public class Account {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return url;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getBio() {
@@ -58,7 +58,7 @@ public class Account {
     public String toString() {
         return "Account{"
                 + "id=" + id
-                + ", name=" + name
+                + ", url=" + url
                 + ", bio=" + bio
                 + ", reputation=" + reputation
                 + ", created=" + created + '}';
