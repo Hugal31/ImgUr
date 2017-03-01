@@ -106,10 +106,13 @@ public class Imgur {
             Response response = getOAuthService().execute(request);
 
             JSONObject jsonResponse = new JSONObject(response.getBody());
-            if (! jsonResponse.optBoolean("success", false))
+            if (! jsonResponse.optBoolean("success", false)) {
+                String errorMsg = response.getBody();
+                if (jsonResponse.optJSONObject("data") != null)
+                    errorMsg = jsonResponse.optJSONObject("data").optString("error", errorMsg);
                 throw new ImgurException(String.format("Imgur return code %d and error: '%s')",
-                        jsonResponse.optInt("code", response.getCode()),
-                        jsonResponse.optString("error", response.getBody())));
+                        jsonResponse.optInt("code", response.getCode()), errorMsg));
+            }
             return jsonResponse;
         } catch (ImgurException e) {
             throw e;
