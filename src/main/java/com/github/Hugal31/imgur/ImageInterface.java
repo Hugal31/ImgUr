@@ -2,9 +2,9 @@ package com.github.Hugal31.imgur;
 
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Verb;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.*;
-import java.util.Base64;
 
 public class ImageInterface {
 
@@ -51,7 +51,7 @@ public class ImageInterface {
             }
         }
 
-        upload(new String(Base64.getEncoder().encode(outputStream.toByteArray())), title, description, fileName);
+        upload(new String(Base64.encodeBase64(outputStream.toByteArray())), title, description, fileName);
     }
 
     public void upload(String base64Image) throws ImgurException {
