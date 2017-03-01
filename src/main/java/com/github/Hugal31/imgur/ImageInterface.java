@@ -18,6 +18,12 @@ public class ImageInterface {
         return ImageUtil.requestImage(imgur, new OAuthRequest(Verb.GET, Imgur.API_URL + "/image/" + imageId));
     }
 
+    public void delete(String imageId) throws ImgurException {
+        imgur.executeJSONRequest(new OAuthRequest(
+                Verb.DELETE,
+                String.format("%s/image/%s", Imgur.API_URL, imageId)));
+    }
+
     public void favorite(String imageId) throws ImgurException {
         imgur.executeJSONRequest(new OAuthRequest(
                 Verb.POST,

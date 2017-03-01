@@ -16,6 +16,12 @@ public class AlbumInterface {
                 new OAuthRequest(Verb.GET, String.format("%s/album/%s", Imgur.API_URL, albumId)));
     }
 
+    public void delete(String imageId) throws ImgurException {
+        imgur.executeJSONRequest(new OAuthRequest(
+                Verb.DELETE,
+                String.format("%s/album/%s", Imgur.API_URL, imageId)));
+    }
+
     public void favorite(String albumId) throws ImgurException {
         imgur.executeJSONRequest(new OAuthRequest(
                 Verb.POST,
